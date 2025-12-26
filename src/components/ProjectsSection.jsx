@@ -1,4 +1,8 @@
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import SS from "../assets/SS.png";
+import SS2 from "../assets/SS2.png";
+import SS3 from "../assets/SS3.png";
+import SS4 from "../assets/SS4.png";
 
 const projects = [
   {
@@ -6,7 +10,7 @@ const projects = [
     title: "Online Parking Booking System",
     description:
     "React app for fully functional online parking booking system.",
-    image: "SS.png",
+    image: SS,
     tags: ["React","MongoDB","JavaScript"],
     demoUrl: "https://parking-reservation-system-8g4e.vercel.app",
     githubUrl: "https://github.com/raghavdashrath",
@@ -16,7 +20,7 @@ const projects = [
     title: "Facial Emotion Recognition",
     description:
       "Interactive web app for real-time facial emotion analysis using OpenCv.",
-    image: "SS2.png",
+    image: SS2,
     tags: ["Deep Learning", "Flask", "OpenCV"],
     demoUrl: "#",
     githubUrl: "#",
@@ -25,7 +29,7 @@ const projects = [
     id: 3,
     title: "Plant Diesease Detection",
     description: "Web app for detecting plant diseases using Deep learning.",
-    image: "SS4.png",
+    image: SS4,
     tags: ["Python", "Neural Network", "MLOps"],
     demoUrl: "https://vbfedpu5ezx7ci7e5mmnkf.streamlit.app/mlops",
     githubUrl: "https://github.com/raghavdashrath/Plant_Disease_Detection",
@@ -35,7 +39,7 @@ const projects = [
     title: "Brain Tumor Detection",
     description:
       "Deep learning model to detect brain tumors from MRI images with high accuracy.",
-    image: "SS3.png",
+    image: SS3,
     tags: ["Deep Learning", "Streamlit", "MLOps"],
     demoUrl: "#",
     githubUrl: "https://github.com/raghavdashrath/Brain_Tumor_Detection",
@@ -57,15 +61,16 @@ export const ProjectsSection = () => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {projects.map((project, key) => (
+          {projects.map((project) => (
             <div
-              key={key}
+              key={project.id}
               className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
             >
               <div className="h-48 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
+                  onError={(e) => (e.currentTarget.src = "/vite.svg")}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
