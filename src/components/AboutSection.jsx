@@ -1,6 +1,25 @@
 import { Cpu, Code , Database } from "lucide-react";
 
 export const AboutSection = () => {
+  const downloadCV = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('/Raghav_Dashrath_CV.pdf');
+      if (!res.ok) throw new Error('Network response was not ok');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Raghav_Dashrath_CV.pdf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      window.open('/Raghav_Dashrath_CV.pdf', '_blank', 'noreferrer');
+    }
+  };
+
   return (
     <section id="about" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
@@ -31,8 +50,11 @@ export const AboutSection = () => {
 
               <a
                 href="/Raghav_Dashrath_CV.pdf"
+                onClick={downloadCV}
                 className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
                 download
+                role="button"
+                aria-label="Download CV"
               >
                 Download CV
               </a>
