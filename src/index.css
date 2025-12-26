@@ -18,6 +18,9 @@
   --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
   --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
   --animate-meteor: meteor 5s linear infinite;
+  --animate-cloud-slow: cloud-float 18s ease-in-out infinite;
+  --animate-cloud-slow-2: cloud-float 26s ease-in-out infinite;
+  --animate-sun-glow: sun-glow 6s ease-in-out infinite; 
 
   @keyframes float {
     0%,
@@ -60,11 +63,57 @@
       opacity: 0;
     }
   }
+
+  @keyframes cloud-float {
+    0% {
+      transform: translateX(0) translateY(0);
+    }
+    50% {
+      transform: translateX(24px) translateY(-8px);
+    }
+    100% {
+      transform: translateX(0) translateY(0);
+    }
+  }
+
+  @keyframes sun-glow {
+    0% {
+      filter: drop-shadow(0 0 0 rgba(255, 223, 112, 0));
+    }
+    50% {
+      filter: drop-shadow(0 0 30px rgba(255, 223, 112, 0.18));
+      transform: scale(1.02);
+    }
+    100% {
+      filter: drop-shadow(0 0 0 rgba(255, 223, 112, 0));
+      transform: scale(1);
+    }
+  }
+
+  /* clouds traverse across the viewport so they feel dynamic */
+  @keyframes cloud-move-right {
+    0% {
+      transform: translateX(-40vw);
+    }
+    100% {
+      transform: translateX(120vw);
+    }
+  }
+
+  @keyframes cloud-move-left {
+    0% {
+      transform: translateX(120vw);
+    }
+    100% {
+      transform: translateX(-40vw);
+    }
+  }
 }
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
+    /* stronger sky-blue for light/day mode */
+    --background: 205 92% 92%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -153,6 +202,62 @@
   @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
+
+@utility sun {
+  @apply absolute rounded-full;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at 30% 30%, #fff9e6 0%, #ffd86b 38%, #ffc34d 100%);
+  box-shadow: 0 8px 30px rgba(255, 195, 70, 0.06);
+  opacity: 0.9;
+  animation: var(--animate-sun-glow);
+}
+
+@media (min-width: 768px) {
+  .sun {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@utility cloud {
+  @apply absolute;
+  opacity: 0.98;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,247,250,0.98));
+  border-radius: 9999px;
+  filter: drop-shadow(0 8px 20px rgba(18, 25, 40, 0.06));
+}
+
+/* helper classes for cloud puffs */
+.cloud-puff {
+  position: absolute;
+  background: linear-gradient(180deg, rgba(255,255,255,1), rgba(245,247,250,1));
+  border-radius: 9999px;
+  box-shadow: 0 6px 16px rgba(18,25,40,0.06);
+}
+
+/* animation helper classes */
+.animate-cloud-slow {
+  animation: var(--animate-cloud-slow);
+}
+.animate-cloud-slow-2 {
+  animation: var(--animate-cloud-slow-2);
+}
+
+/* movement helpers - clouds move across the viewport */
+.animate-cloud-move-right {
+  animation: cloud-move-right 48s linear infinite;
+}
+.animate-cloud-move-left {
+  animation: cloud-move-left 62s linear infinite;
+}
+/* slower clouds for lower, calmer layers */
+.animate-cloud-move-right-slow {
+  animation: cloud-move-right 88s linear infinite;
+}
+.animate-cloud-move-left-slow {
+  animation: cloud-move-left 92s linear infinite;
+} 
 
 #root {
   max-width: 100%;
