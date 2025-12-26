@@ -25,9 +25,9 @@ const projects = [
     id: 3,
     title: "Plant Diesease Detection",
     description: "Web app for detecting plant diseases using Deep learning.",
-    image: "/projects/project1.png",
+    image: "SS4.png",
     tags: ["Python", "Neural Network", "MLOps"],
-    demoUrl: "#",
+    demoUrl: "https://vbfedpu5ezx7ci7e5mmnkf.streamlit.app/mlops",
     githubUrl: "https://github.com/raghavdashrath/Plant_Disease_Detection",
   },
   {
